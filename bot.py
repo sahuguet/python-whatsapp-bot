@@ -16,7 +16,8 @@ def bot():
         r = requests.get('https://api.quotable.io/random')
         if r.status_code == 200:
             data = r.json()
-            quote = f'{data["content"]} ({data["author"]})'
+            # quote = f'{data["content"]} ({data["author"]})' only works with Python 3.8
+            quote = "%s (%s)" % (data["content"], data["author"])
         else:
             quote = 'I could not retrieve a quote at this time, sorry.'
         msg.body(quote)
